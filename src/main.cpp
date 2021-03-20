@@ -23,23 +23,23 @@ struct tilt {
 };
 
 tilt tilt_array[] = {
-  { 0, BLEUUID::fromString("A495BB10-C5B1-4B44-B512-1370F02D74DE"), "red", true, 1000, 32 },
-  { 1, BLEUUID::fromString("A495BB20-C5B1-4B44-B512-1370F02D74DE"), "green", true, 1000, 32 },
-  { 2, BLEUUID::fromString("A495BB30-C5B1-4B44-B512-1370F02D74DE"), "black", true, 1000, 32 },
-  { 3, BLEUUID::fromString("A495BB40-C5B1-4B44-B512-1370F02D74DE"), "purple", true, 1000, 32 },
-  { 4, BLEUUID::fromString("A495BB50-C5B1-4B44-B512-1370F02D74DE"), "orange", true, 1000, 32 },
-  { 5, BLEUUID::fromString("A495BB60-C5B1-4B44-B512-1370F02D74DE"), "blue", true, 1000, 32 },
-  { 6, BLEUUID::fromString("A495BB70-C5B1-4B44-B512-1370F02D74DE"), "yellow", true, 1000, 32 },
-  { 7, BLEUUID::fromString("A495BB80-C5B1-4B44-B512-1370F02D74DE"), "pink", true, 1000, 32 },
+  { 0, BLEUUID::fromString("A495BB10-C5B1-4B44-B512-1370F02D74DE"), "red", false, 1006, 64 },
+  { 1, BLEUUID::fromString("A495BB20-C5B1-4B44-B512-1370F02D74DE"), "green", false, 1364, 65 },
+  { 2, BLEUUID::fromString("A495BB30-C5B1-4B44-B512-1370F02D74DE"), "black", false, 1158, 63 },
+  { 3, BLEUUID::fromString("A495BB40-C5B1-4B44-B512-1370F02D74DE"), "purple", false, 1001, 61 },
+  { 4, BLEUUID::fromString("A495BB50-C5B1-4B44-B512-1370F02D74DE"), "orange", false, 1195, 68 },
+  { 5, BLEUUID::fromString("A495BB60-C5B1-4B44-B512-1370F02D74DE"), "blue", false, 1764, 67 },
+  { 6, BLEUUID::fromString("A495BB70-C5B1-4B44-B512-1370F02D74DE"), "yellow", false, 1121, 70 },
+  { 7, BLEUUID::fromString("A495BB80-C5B1-4B44-B512-1370F02D74DE"), "pink", false, 1200, 69 },
   // Tilt Pro / https://tilthydrometer.com/products/tilt-pro-wireless-hydrometer-and-thermometer
-  { 8, BLEUUID::fromString("A495BB10-C5B1-4B44-B512-1370F02D74DE"), "red*hd", true, 10000, 320 },
-  { 9, BLEUUID::fromString("A495BB20-C5B1-4B44-B512-1370F02D74DE"), "green*hd", true, 10000, 320 },
-  {10, BLEUUID::fromString("A495BB30-C5B1-4B44-B512-1370F02D74DE"), "black*hd", true, 10000, 320 },
-  {11, BLEUUID::fromString("A495BB40-C5B1-4B44-B512-1370F02D74DE"), "purple*hd", true, 10000, 320 },
-  {12, BLEUUID::fromString("A495BB50-C5B1-4B44-B512-1370F02D74DE"), "orange*hd", true, 10000, 320 },
-  {13, BLEUUID::fromString("A495BB60-C5B1-4B44-B512-1370F02D74DE"), "blue*hd", true, 10000, 320 },
-  {14, BLEUUID::fromString("A495BB70-C5B1-4B44-B512-1370F02D74DE"), "yellow*hd", true, 10000, 320 },
-  {15, BLEUUID::fromString("A495BB80-C5B1-4B44-B512-1370F02D74DE"), "pink*hd", true, 10000, 320 },
+  { 8, BLEUUID::fromString("A495BB10-C5B1-4B44-B512-1370F02D74DE"), "red*hd", false, 12001, 641 },
+  { 9, BLEUUID::fromString("A495BB20-C5B1-4B44-B512-1370F02D74DE"), "green*hd", false, 11398, 653 },
+  {10, BLEUUID::fromString("A495BB30-C5B1-4B44-B512-1370F02D74DE"), "black*hd", false, 11531, 638 },
+  {11, BLEUUID::fromString("A495BB40-C5B1-4B44-B512-1370F02D74DE"), "purple*hd", false, 11663, 619 },
+  {12, BLEUUID::fromString("A495BB50-C5B1-4B44-B512-1370F02D74DE"), "orange*hd", false, 11909, 684 },
+  {13, BLEUUID::fromString("A495BB60-C5B1-4B44-B512-1370F02D74DE"), "blue*hd", false, 11743, 677 },
+  {14, BLEUUID::fromString("A495BB70-C5B1-4B44-B512-1370F02D74DE"), "yellow*hd", false, 10969, 704 },
+  {15, BLEUUID::fromString("A495BB80-C5B1-4B44-B512-1370F02D74DE"), "pink*hd", false, 11282, 696 },
 };
 
 BLEAdvertising *pAdvertising;
@@ -96,6 +96,8 @@ void setup() {
       html += "<p>Disable all devices:</p>";
       String ip = WiFi.localIP ().toString ();
       html += "<code>curl \"http://" + ip + "/setTilt?name=*&active=off\"</code>";
+      html += "<p>Enable all devices:</p>";
+      html += "<code>curl \"http://" + ip + "/setTilt?name=*&active=on\"</code>";
       html += "<p>Enable the <b>Red*HD</b> (Pro) device with specific gravity and temperature values:</p>";
       html += "<code>curl \"http://" + ip + "/setTilt?name=red*hd&active=on&sg=1.2001&temp=65.1\"</code>";
       html += "</body></html>";
